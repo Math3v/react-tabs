@@ -17,14 +17,21 @@ class ListListingContainer extends Component {
   constructor() {
     super();
     this.state = {
-      listings: []
+      listings: [],
+      activeTab: ''
     }
   }
 
   handleTabClick(tabName) {
     this.setState({
-      listings: dataFromServer[tabName]
+      listings: dataFromServer[tabName],
+      activeTab: tabName
     })
+  }
+
+  tabClass(tabName) {
+    const activeClass = 'active';
+    return this.state.activeTab === tabName ? activeClass : undefined;
   }
 
   render() {
@@ -32,12 +39,12 @@ class ListListingContainer extends Component {
       <div>
         <div className="tab">
           <button
-            className="tablinks"
+            className={this.tabClass('listingsTab1')}
             onClick={this.handleTabClick.bind(this, 'listingsTab1')}>
             Tab 1
           </button>
           <button
-            className="tablinks"
+            className={this.tabClass('listingsTab2')}
             onClick={this.handleTabClick.bind(this, 'listingsTab2')}>
             Tab 2
           </button>
